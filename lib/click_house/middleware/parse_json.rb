@@ -7,7 +7,7 @@ module ClickHouse
 
       # @param env [Faraday::Env]
       def on_complete(env)
-        env.body = JSON.parse(env.body, config.json_load_options) if json?
+        env.body = JSON.parse(env.body, config.json_load_options) if json?(env.body)
       end
 
       private
