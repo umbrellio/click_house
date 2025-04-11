@@ -7,9 +7,13 @@ module ClickHouse
 
       # @param env [Faraday::Env]
       def on_complete(env)
-        return unless content_type?(env, content_type)
+        env.body = JSON.parse(env.body, config.json_load_options) if json?(env.body)
+      end
 
-        env.body = JSON.parse(env.body, config.json_load_options) unless env.body.strip.empty?
+      private
+
+      def json?(str)
+        str.strip =~ /^(\[|\{)/
       end
     end
   end
