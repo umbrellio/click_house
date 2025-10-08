@@ -18,7 +18,7 @@ module ClickHouse
     end
 
     def execute(query, body = nil, database: config.database, params: {})
-      post(body, query: { query: query }, database: database, params: config.global_params.merge(params))
+      post(body, query: { query: query }, database: database, params: params)
     end
 
     # @param path [String] Clickhouse HTTP endpoint, e.g. /ping, /replica_status
@@ -36,6 +36,7 @@ module ClickHouse
       end
 
       transport.get(path) do |conn|
+        query = config.global_params.merge(query)
         conn.params = query.merge(database: database).compact
         conn.params[:send_progress_in_http_headers] = 1 unless body.empty?
         conn.body = body
@@ -43,6 +44,7 @@ module ClickHouse
     end
 
     def post(body = nil, query: {}, database: config.database, params: {})
+      params = config.global_params.merge(params)
       transport.post(compose('/', query.merge(database: database, **params)), body)
     end
 
