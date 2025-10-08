@@ -13,7 +13,7 @@ module ClickHouse
       private
 
       def json?(str)
-        str.strip =~ /^(\[|\{)/
+        str.is_a?(String) && str.strip =~ /^(\[|\{)/
       end
     end
   end

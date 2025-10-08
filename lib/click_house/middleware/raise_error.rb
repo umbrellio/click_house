@@ -17,7 +17,7 @@ module ClickHouse
       # @param env [Faraday::Env]
       def on_complete(env)
         if env.response_headers.include?(EXCEPTION_CODE_HEADER) ||
-           !env.success? || env.body.match?(/DB::Exception/)
+           !env.success? || env.body.include?('DB::Exception')
           raise DbException, "[#{env.status}] #{env.body}"
         end
       end

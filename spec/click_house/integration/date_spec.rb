@@ -7,7 +7,7 @@ RSpec.describe ClickHouse::Type::IPType do
 
   before do
     subject.execute <<~SQL
-      CREATE TABLE rspec(
+      CREATE TABLE IF NOT EXISTS rspec(
           a Date,
           b Nullable(Date)
        ) ENGINE Memory
