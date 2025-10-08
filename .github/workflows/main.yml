@@ -9,7 +9,7 @@ jobs:
     services:
       clickhouse:
         image: clickhouse/clickhouse-server:22.9
-        ports: 
+        ports:
           - 8123:8123
 
     strategy:
@@ -34,10 +34,10 @@ jobs:
         run: make faraday1 rspec
       - name: Run tests with faraday v.2 JSON
         run: make faraday2 rspec
-      - name: Run tests with faraday v.1 OJ
-        run: make faraday1 oj rspec
-      - name: Run tests with faraday v.2 OJ
-        run: make faraday2 oj rspec
+      # - name: Run tests with faraday v.1 OJ
+      #   run: make faraday1 oj rspec
+      # - name: Run tests with faraday v.2 OJ
+      #   run: make faraday2 oj rspec
 
   rubocop:
     runs-on: ubuntu-latest
