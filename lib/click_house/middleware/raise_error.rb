@@ -11,7 +11,11 @@ module ClickHouse
       def call(env)
         super
       rescue Faraday::ConnectionFailed => e
-        raise NetworkException, e.message, e.backtrace
+        if e.message.include?('end of file reached')
+          retry
+        else
+          raise NetworkException, e.message, e.backtrace
+        end
       end
 
       # @param env [Faraday::Env]
