@@ -3,7 +3,7 @@
 module ClickHouse
   class Config
     DEFAULTS = {
-      adapter: :typhoeus,
+      adapter: :http,
       url: nil,
       scheme: 'http',
       host: 'localhost',
