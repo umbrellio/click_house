@@ -67,12 +67,12 @@ module ClickHouse
           end
         end
 
-        conn.adapter config.adapter
         conn.response Middleware::Logging, logger: config.logger!
         conn.response Middleware::SummaryMiddleware, options: { config: config } # should be after logger
         conn.response config.json_parser, options: { config: config }
         conn.response Middleware::ParseCsv, content_type: %r{text/csv}, options: { config: config }
         conn.response Middleware::RaiseError
+        conn.adapter config.adapter
       end
     end
     # rubocop:enable Metrics/AbcSize
