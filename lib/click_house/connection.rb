@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'faraday/typhoeus'
+require 'faraday/http'
 
 module ClickHouse
   class Connection

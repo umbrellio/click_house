@@ -4,7 +4,7 @@ PATH
     click_house (2.1.3)
       activesupport
       faraday (>= 2, < 3)
-      faraday-typhoeus
+      faraday-http
 
 GEM
   remote: https://rubygems.org/
@@ -34,21 +34,23 @@ GEM
       bigdecimal
       rexml
     diff-lcs (1.6.2)
+    domain_name (0.6.20240107)
     drb (2.2.3)
-    ethon (0.18.0)
-      ffi (>= 1.15.0)
-      logger
     faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
+    faraday-http (2.1.0)
+      faraday (~> 2.5)
+      http (>= 4.0, < 7)
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
-    faraday-typhoeus (2.0.0)
-      faraday (~> 2.0)
-      typhoeus (~> 1.4)
-    ffi (1.17.3)
     hashdiff (1.2.1)
+    http (6.0.1)
+      http-cookie (~> 1.0)
+      llhttp (~> 0.6.1)
+    http-cookie (1.1.0)
+      domain_name (~> 0.5)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-console (0.8.2)
@@ -58,6 +60,7 @@ GEM
       bigdecimal (>= 3.1, < 5)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
+    llhttp (0.6.1)
     logger (1.7.0)
     mcp (0.8.0)
       json-schema (>= 4.1)
@@ -122,8 +125,6 @@ GEM
       rubocop-ast (>= 1.47.1, < 2.0)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    typhoeus (1.6.0)
-      ethon (>= 0.18.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.2.0)
