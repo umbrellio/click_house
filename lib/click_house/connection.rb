@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'faraday/http'
-
 module ClickHouse
+  require 'faraday/http'
+
   class Connection
     include Extend::ConnectionHealthy
     include Extend::ConnectionDatabase
