@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require "typhoeus"
-require "typhoeus/adapters/faraday"
+require 'typhoeus/typhoeus'
 
 module ClickHouse
   class Connection
