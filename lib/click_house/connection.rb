@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "typhoeus"
 require "typhoeus/adapters/faraday"
 
 module ClickHouse
