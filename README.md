@@ -46,7 +46,7 @@ Yandex uses HTTP interface for working from Java and Perl, Python and Go as well
 ```ruby
 ClickHouse.config do |config|
   config.logger = Logger.new(STDOUT)
-  config.adapter = :net_http
+  config.adapter = :typhoeus
   config.database = 'metrics'
   config.url = 'http://localhost:8123'
   config.timeout = 60

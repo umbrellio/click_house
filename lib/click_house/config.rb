@@ -3,7 +3,7 @@
 module ClickHouse
   class Config
     DEFAULTS = {
-      adapter: Faraday.default_adapter,
+      adapter: :typhoeus,
       url: nil,
       scheme: 'http',
       host: 'localhost',
