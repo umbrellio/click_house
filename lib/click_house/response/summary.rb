@@ -7,7 +7,6 @@ module ClickHouse
       KEY_TOTALS = 'totals'
       KEY_STATISTICS = 'statistics'
       KEY_ROWS_BEFORE_LIMIT_AT_LEAST = 'rows_before_limit_at_least'
-      KEY_STAT_ELAPSED = 'elapsed'
 
       attr_reader :config,
                   :headers,
@@ -79,12 +78,12 @@ module ClickHouse
 
       # @return [Float]
       def elapsed
-        statistics[config.key(KEY_STAT_ELAPSED)].to_f
+        summary[config.key('elapsed_ns')].to_f
       end
 
       # @return [String]
       def elapsed_pretty
-        Util::Pretty.measure(elapsed * 1000)
+        Util::Pretty.measure(elapsed / 1000)
       end
 
       private
@@ -98,6 +97,7 @@ module ClickHouse
       #   "total_rows_to_read" => "0",
       #   "result_rows" => "1",
       #   "result_bytes" => "23",
+      #   "elapsed_ns" => "13251725",
       # }
       def parse_summary(value)
         return {} if value.nil? || value.empty?
