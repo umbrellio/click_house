@@ -7,6 +7,7 @@ module ClickHouse
       KEY_TOTALS = 'totals'
       KEY_STATISTICS = 'statistics'
       KEY_ROWS_BEFORE_LIMIT_AT_LEAST = 'rows_before_limit_at_least'
+      KEY_STAT_ELAPSED = 'elapsed'
 
       attr_reader :config,
                   :headers,
@@ -77,13 +78,17 @@ module ClickHouse
       end
 
       # @return [Float]
-      def elapsed
-        summary[config.key('elapsed_ns')].to_f
+      def elapsed_ms
+        if statistics[config.key(KEY_STAT_ELAPSED)].nil?
+          summary[config.key('elapsed_ns')].to_f * 1000
+        else
+          statistics[config.key(KEY_STAT_ELAPSED)].to_f / 1_000_000
+        end
       end
 
       # @return [String]
       def elapsed_pretty
-        Util::Pretty.measure(elapsed / 1_000_000)
+        Util::Pretty.measure(elapsed_ms)
       end
 
       private
