@@ -83,7 +83,7 @@ module ClickHouse
 
       # @return [String]
       def elapsed_pretty
-        Util::Pretty.measure(elapsed / 1000)
+        Util::Pretty.measure(elapsed / 1_000_000)
       end
 
       private
