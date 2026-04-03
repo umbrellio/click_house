@@ -78,13 +78,17 @@ module ClickHouse
       end
 
       # @return [Float]
-      def elapsed
-        statistics[config.key(KEY_STAT_ELAPSED)].to_f
+      def elapsed_ms
+        if statistics[config.key(KEY_STAT_ELAPSED)].nil?
+          summary[config.key('elapsed_ns')].to_f / 1_000_000
+        else
+          statistics[config.key(KEY_STAT_ELAPSED)].to_f * 1000
+        end
       end
 
       # @return [String]
       def elapsed_pretty
-        Util::Pretty.measure(elapsed * 1000)
+        Util::Pretty.measure(elapsed_ms)
       end
 
       private
@@ -98,6 +102,7 @@ module ClickHouse
       #   "total_rows_to_read" => "0",
       #   "result_rows" => "1",
       #   "result_bytes" => "23",
+      #   "elapsed_ns" => "13251725",
       # }
       def parse_summary(value)
         return {} if value.nil? || value.empty?
