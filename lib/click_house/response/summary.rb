@@ -80,9 +80,9 @@ module ClickHouse
       # @return [Float]
       def elapsed_ms
         if statistics[config.key(KEY_STAT_ELAPSED)].nil?
-          summary[config.key('elapsed_ns')].to_f * 1000
+          summary[config.key('elapsed_ns')].to_f / 1_000_000
         else
-          statistics[config.key(KEY_STAT_ELAPSED)].to_f / 1_000_000
+          statistics[config.key(KEY_STAT_ELAPSED)].to_f * 1000
         end
       end
 
